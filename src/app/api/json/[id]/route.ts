@@ -1,17 +1,12 @@
 import prisma from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 
-type Params = {
-  params: {
-    id: string
-  }
-}
 
-export async function GET(request: NextRequest, params: Params) {
+export async function GET(request: NextRequest, { params }: { params: {id: string }}) {
   try {
     const json = await prisma.jsonData.findUnique({
       where: {
-        id: params.params.id
+        id: params.id
       }
     });
 
